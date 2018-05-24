@@ -12,16 +12,32 @@ class Blog extends Component {
   
   componentDidMount() {
     Axios.get("https://jsonplaceholder.typicode.com/posts")
+      //will have all the data at this point  
       .then(response => {
-        this.setState({posts: response.data});
+        const getFirstFour = response.data.slice(0, 4);
+        const addAuthor = getFirstFour.map(postElement => {
+          //new js obj with author field added / "concatenated"
+          return {
+            ...postElement,
+            author: "Joe"
+          }
+        });
+
+        this.setState({posts: addAuthor});  //trigger re-render
         console.log(response);
       });
   }
   
   render() {
+    //render setup of data we fetched
     let postsArray = [];
     postsArray = this.state.posts.map(postElement => {
-      return <Post key={postElement.id} myTitle={postElement.title}/>;
+      return ( 
+        <Post 
+          key={postElement.id} 
+          myTitle={postElement.title} 
+          myAuthor={postElement.author} />
+      );
     });
 
     return (
