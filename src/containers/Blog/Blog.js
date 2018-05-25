@@ -7,7 +7,8 @@ import Axios from "axios";
 
 class Blog extends Component {
   state = {
-    posts: []
+    posts: [],
+    selectedPost: null
   }
   
   componentDidMount() {
@@ -27,6 +28,12 @@ class Blog extends Component {
         console.log(response);
       });
   }
+
+  postSelectedHandler = (id) => {
+    const postToPass = this.state.posts.filter(post => post.id === id);
+    this.setState({selectedPost: postToPass});
+    console.log(postToPass);
+  }
   
   render() {
     //render setup of data we fetched
@@ -36,7 +43,8 @@ class Blog extends Component {
         <Post 
           key={postElement.id} 
           myTitle={postElement.title} 
-          myAuthor={postElement.author} />
+          myAuthor={postElement.author}
+          clicked={() => this.postSelectedHandler(postElement.id)} />
       );
     });
 
@@ -46,7 +54,8 @@ class Blog extends Component {
           {postsArray}
         </section>
         <section>
-          <FullPost />
+          {/*selectedPost is of type [{...}]*/}
+          <FullPost selectedPost={this.state.selectedPost}/>
         </section>
         <section>
           <NewPost />
