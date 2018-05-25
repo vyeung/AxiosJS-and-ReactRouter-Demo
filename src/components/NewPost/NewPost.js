@@ -9,7 +9,7 @@ class NewPost extends Component {
     author: 'Max'
   }
 
-  //sending a POST request
+  //sending a POST request to server
   addPostHandler = () => {
     const newPost = {
       title: this.state.title,
