@@ -9,7 +9,7 @@ class NewPost extends Component {
     author: 'Max'
   }
 
-  //sending a POST request
+  //sending a POST request to server
   addPostHandler = () => {
     const newPost = {
       title: this.state.title,
@@ -41,8 +41,8 @@ class NewPost extends Component {
         />
         <label>Author</label>
         <select value={this.state.author} onChange={(event) => this.setState({author: event.target.value})}>
-          <option value="Max">Max</option>
-          <option value="Manu">Manu</option>
+          <option value="Tom">Tom</option>
+          <option value="Sara">Sara</option>
         </select>
         <button onClick={this.addPostHandler}>Add Post</button>
       </div>
