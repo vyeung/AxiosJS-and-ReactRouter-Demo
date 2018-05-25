@@ -5,6 +5,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Axios from "axios";
 
+//some global defaults
+Axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+Axios.defaults.headers.common["Authorization"] = "myTOKEN";
+Axios.defaults.headers.post["Test"] = "test";
+
 //common use case here is to add headers
 Axios.interceptors.request.use(requestConfig => {
   console.log(requestConfig);

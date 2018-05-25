@@ -6,7 +6,7 @@ class FullPost extends Component
 {
   //sending a DELETE request to server
   deletePostHandler = () => {
-    Axios.delete("https://jsonplaceholder.typicode.com/posts/" + this.props.selectedPost[0].id)
+    Axios.delete("/posts/" + this.props.selectedPost[0].id)
       .then(response => {
         console.log(response);
       });

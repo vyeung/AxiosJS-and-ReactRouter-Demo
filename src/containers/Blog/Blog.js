@@ -15,7 +15,7 @@ class Blog extends Component {
   componentDidMount() 
   {
     //sending a GET request to server
-    Axios.get("https://jsonplaceholder.typicode.com/posts")
+    Axios.get("/posts")
       //will have all the data at this point  
       .then(response => {
         const getFirstFour = response.data.slice(0, 4);
