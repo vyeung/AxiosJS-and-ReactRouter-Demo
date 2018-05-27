@@ -1,15 +1,3 @@
-.Posts {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 80%;
-  margin: auto;
-}
-
-.blogParaCenter {
-  text-align: center;
-}
-
 .Blog ul{
   list-style: none;
   margin: 0;
