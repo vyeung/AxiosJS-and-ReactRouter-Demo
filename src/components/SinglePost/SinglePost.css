@@ -1,4 +1,4 @@
-.Post {
+.SinglePost {
   width: 175px;
   padding: 16px;
   text-align: center;
@@ -9,8 +9,8 @@
   cursor: pointer;
 }
 
-.Post:hover,
-.Post:active {
+.SinglePost:hover,
+.SinglePost:active {
   background-color: #C0DDF5;
 }
 

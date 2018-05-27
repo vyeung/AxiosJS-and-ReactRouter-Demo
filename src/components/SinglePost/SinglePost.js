@@ -1,9 +1,9 @@
 import React from 'react';
-import './Post.css';
+import './SinglePost.css';
 
-const post = (props) => {
+const singlePost = (props) => {
   return (
-    <article className="Post" onClick={props.clicked}>
+    <article className="SinglePost" onClick={props.clicked}>
       <h1>{props.myTitle}</h1>
       <div className="Info">
         <div className="Author">{props.myAuthor}</div>
@@ -12,4 +12,4 @@ const post = (props) => {
   );
 };
 
-export default post;
+export default singlePost;
