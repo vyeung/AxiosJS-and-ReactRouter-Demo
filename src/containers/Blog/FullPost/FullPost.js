@@ -1,34 +1,61 @@
 import React, { Component } from 'react';
 import './FullPost.css';
-import Axios from "axios";
+import axios from "axios";
 
 class FullPost extends Component 
 {
+  state = {
+    loadedPost: null,
+    hasError: false
+  }
+
+  componentDidMount() {
+    //console.log(this.props);
+    
+    if(this.props.match.params.id != null) {
+      axios.get('/posts/' + this.props.match.params.id)
+        .then(response => {
+          this.setState({loadedPost: response.data});
+        })
+        .catch(error => {
+          this.setState({hasError: true});
+        });
+    }
+  }
+
   //sending a DELETE request to server
   deletePostHandler = () => {
-    Axios.delete("/posts/" + this.props.selectedPost[0].id)
+    axios.delete('/posts/' + this.props.match.params.id)
       .then(response => {
         console.log(response);
       });
   }
-  
+
   render() {
-    let post = <p className="paraCenter">Please select a Post from above!</p>;
-    
-    //when selectedPost is actually something
-    if(this.props.selectedPost !== null) {
+    let post;
+
+    if(this.state.hasError === true) {
+      return post = <p className="paraCenter">Couldn't Get Post!</p>;
+    }
+    if(this.props.match.params.id != null) {
+      post = <p className="paraCenter">Loading...!</p>;
+    }
+    if(this.state.loadedPost != null){
       post = (
         <div className="FullPost">
-          <h1>{this.props.selectedPost[0].title}</h1>
-          <p>{this.props.selectedPost[0].body}</p>
+          <h1>{this.state.loadedPost.title}</h1>
+          <p>{this.state.loadedPost.body}</p>
           <div className="Edit">
-            <button className="Delete" onClick={this.deletePostHandler}>Delete</button>
+            <button 
+              onClick={this.deletePostHandler} 
+              className="Delete"
+              >Delete</button>
           </div>
         </div>
       );
     }
 
-    //will be the p tag or div 
+    //will be p tag or div
     return post;
   }
 }
