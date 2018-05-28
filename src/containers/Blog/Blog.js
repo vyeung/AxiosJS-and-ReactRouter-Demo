@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from "react-router-dom";
 import './Blog.css';
 import Posts from "./Posts/Posts";
+import NewPost from "./NewPost/NewPost";
 
 class Blog extends Component {
   render() {
@@ -18,8 +20,15 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
+      
+        {/*when exact path is /, render some JSX*/}
+        {/*<Route path="/" exact render={() => <h1>Home</h1>} /> */}
+        
+        {/*when exact path is /, load a component*/}
+        <Route path="/" exact component={Posts} />
 
-        <Posts />
+        {/*handle all routes that start with /new-post*/}
+        <Route path="/new-post" component={NewPost} />
       </div>
     );
   }
