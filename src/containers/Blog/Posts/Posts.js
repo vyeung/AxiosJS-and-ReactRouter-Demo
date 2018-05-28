@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import "./Posts.css";
 import SinglePost from "../../../components/SinglePost/SinglePost";
 import axios from "axios";
@@ -10,7 +11,7 @@ class Posts extends Component {
     hasError: false
   }
 
-  componentDidMount() 
+  componentDidMount()
   {
     //sending GET request to server
     axios.get("/posts")
@@ -34,9 +35,9 @@ class Posts extends Component {
   }
 
   postSelectedHandler = (id) => {
-    const postToPass = this.state.posts.filter(post => post.id === id);
-    this.setState({selectedPost: postToPass});
-    console.log(postToPass);
+    // const postToPass = this.state.posts.filter(post => post.id === id);
+    // this.setState({selectedPost: postToPass});
+    // console.log(postToPass);
   }
   
   render() {
@@ -45,15 +46,17 @@ class Posts extends Component {
       fetchedPosts = <p className="postsParaCenter">Couldn't Get Posts!</p>
     }
     else {
-      //will be of type []
+      //will be of type [{}]
       fetchedPosts = this.state.posts.map(postElement => {
         return ( 
-          <SinglePost 
-            key={postElement.id} 
-            myTitle={postElement.title} 
-            myAuthor={postElement.author}
-            clicked={() => this.postSelectedHandler(postElement.id)} 
-          />
+          //specifying path for the dynamic route in Blog.js
+          <Link to={"/" + postElement.id} key={postElement.id}>
+            <SinglePost 
+              myTitle={postElement.title} 
+              myAuthor={postElement.author}
+              clicked={() => this.postSelectedHandler(postElement.id)} 
+            />
+          </Link>
         );
       });
     }

@@ -3,6 +3,7 @@ import { Route, NavLink } from "react-router-dom";
 import './Blog.css';
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
+import FullPost from "./FullPost/FullPost";
 
 class Blog extends Component {
   render() {
@@ -32,6 +33,9 @@ class Blog extends Component {
 
         {/*handle all routes that start with /new-post*/}
         <Route path="/new-post" component={NewPost} />
+
+        {/*a dynamic route parameter*/}
+        <Route path="/:id" exact component={FullPost} />
       </div>
     );
   }
