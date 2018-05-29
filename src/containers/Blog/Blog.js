@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from "react-router-dom";
+import { Route, NavLink, Switch } from "react-router-dom";
 import './Blog.css';
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
@@ -27,15 +27,14 @@ class Blog extends Component {
       
         {/*when exact path is /, render some JSX*/}
         {/*<Route path="/" exact render={() => <h1>Home</h1>} /> */}
-        
-        {/*when exact path is /, load a component*/}
-        <Route path="/" exact component={Posts} />
 
-        {/*handle all routes that start with /new-post*/}
-        <Route path="/new-post" component={NewPost} />
+        <Switch>
+          {/*handle all routes that start with /new-post*/}
+          <Route path="/new-post" component={NewPost} />
 
-        {/*a dynamic route parameter*/}
-        <Route path="/postNumber/:id" exact component={FullPost} />
+          {/*when path is /, load Posts component*/}
+          <Route path="/" component={Posts} />
+        </Switch>
       </div>
     );
   }

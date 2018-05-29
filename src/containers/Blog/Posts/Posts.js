@@ -1,13 +1,13 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 import "./Posts.css";
 import SinglePost from "../../../components/SinglePost/SinglePost";
+import FullPost from "../FullPost/FullPost";
 import axios from "axios";
 
 class Posts extends Component {
   state = {
     posts: [],
-    //selectedPost: null,
     hasError: false
   }
 
@@ -35,9 +35,8 @@ class Posts extends Component {
   }
 
   postSelectedHandler = (id) => {
-    // const postToPass = this.state.posts.filter(post => post.id === id);
-    // this.setState({selectedPost: postToPass});
-    // console.log(postToPass);
+    //if you didn't want to use <Link>
+    //this.props.history.push("/postNumber/" + id);
   }
   
   render() {
@@ -50,7 +49,7 @@ class Posts extends Component {
       fetchedPosts = this.state.posts.map(postElement => {
         return ( 
           //specifying path for the dynamic route in Blog.js
-          <Link to={"/postNumber/" + postElement.id} key={postElement.id}>
+          <Link to={"/postNumber" + postElement.id} key={postElement.id}>
             <SinglePost 
               myTitle={postElement.title} 
               myAuthor={postElement.author}
@@ -62,9 +61,14 @@ class Posts extends Component {
     }
 
     return (
-      <section className="Posts">
-        {fetchedPosts}
-      </section>
+      <div>
+        <section className="Posts">
+          {fetchedPosts}
+        </section>
+
+        {/*a dynamic route parameter*/}
+        <Route path="/postNumber:id" exact component={FullPost} />
+      </div>
     );
   }
 }

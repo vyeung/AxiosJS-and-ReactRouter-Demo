@@ -11,7 +11,6 @@ class FullPost extends Component
 
   componentDidMount() {
     //console.log(this.props);
-    
     if(this.props.match.params.id != null) {
       axios.get('/posts/' + this.props.match.params.id)
         .then(response => {
@@ -19,8 +18,23 @@ class FullPost extends Component
         })
         .catch(error => {
           this.setState({hasError: true});
-        });
+        });  
     }
+  }
+
+  //without this, only the first post clicked ever shows
+  componentDidUpdate() {
+    if(this.props.match.params.id !== null) {
+      if(this.state.loadedPost && this.state.loadedPost.id !== Number(this.props.match.params.id)) { 
+        axios.get('/posts/' + this.props.match.params.id)
+          .then(response => {
+            this.setState({loadedPost: response.data});
+          })
+          .catch(error => {
+            this.setState({hasError: true});
+          });
+      }
+    }  
   }
 
   //sending a DELETE request to server
