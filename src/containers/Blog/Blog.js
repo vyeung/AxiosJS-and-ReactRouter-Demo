@@ -35,7 +35,7 @@ class Blog extends Component {
         <Route path="/new-post" component={NewPost} />
 
         {/*a dynamic route parameter*/}
-        <Route path="/:id" exact component={FullPost} />
+        <Route path="/postNumber/:id" exact component={FullPost} />
       </div>
     );
   }

@@ -50,7 +50,7 @@ class Posts extends Component {
       fetchedPosts = this.state.posts.map(postElement => {
         return ( 
           //specifying path for the dynamic route in Blog.js
-          <Link to={"/" + postElement.id} key={postElement.id}>
+          <Link to={"/postNumber/" + postElement.id} key={postElement.id}>
             <SinglePost 
               myTitle={postElement.title} 
               myAuthor={postElement.author}
