@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Route, NavLink, Switch } from "react-router-dom";
 import './Blog.css';
 import Posts from "./Posts/Posts";
-import NewPost from "./NewPost/NewPost";
-import FullPost from "./FullPost/FullPost";
+
+//import NewPost from "./NewPost/NewPost";
+import asyncHOC from "../../asyncHOC";
+const asyncNewPost = asyncHOC(() => import("./NewPost/NewPost"));
 
 class Blog extends Component {
   render() {
@@ -30,10 +32,13 @@ class Blog extends Component {
 
         <Switch>
           {/*handle all routes that start with /new-post*/}
-          <Route path="/new-post" component={NewPost} />
-
+          <Route path="/new-post" component={asyncNewPost} />
+          
           {/*when path is /, load Posts component*/}
           <Route path="/" component={Posts} />
+
+          {/* Not working
+          <Route render={() => <h1>404 Page Not Found</h1>} /> */}
         </Switch>
       </div>
     );
